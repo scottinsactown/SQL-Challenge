@@ -1,6 +1,4 @@
--- Exported from QuickDBD: https://www.quickdatabasediagrams.com/
--- NOTE! If you have used non-SQL datatypes in your design, you will have to change these here.
-
+-- Exported from QuickDBD and then modified to create composite keys for some tables 
 
 CREATE TABLE "departments" (
     "dept_no" varchar   NOT NULL,
@@ -68,3 +66,14 @@ REFERENCES "employees" ("emp_no");
 ALTER TABLE "titles" ADD CONSTRAINT "fk_titles_emp_no" FOREIGN KEY("emp_no")
 REFERENCES "employees" ("emp_no");
 
+ALTER TABLE "titles"
+ADD CONSTRAINT PK_titles PRIMARY KEY ("emp_no", "from_date");
+
+ALTER TABLE "salaries"
+ADD CONSTRAINT PK_salaries PRIMARY KEY ("emp_no", "from_date");
+
+ALTER TABLE "dept_manager"
+ADD CONSTRAINT PK_dept_manager PRIMARY KEY ("emp_no", "dept_no");
+
+ALTER TABLE "dept_employees"
+ADD CONSTRAINT PK_dept_employees PRIMARY KEY ("emp_no", "dept_no");
